@@ -4,20 +4,24 @@ import { Filter } from './Filter';
 import { ContactList } from './ContactList';
 import { nanoid } from 'nanoid';
 import { Report } from 'notiflix';
+import { Section } from './Section.styled';
+import { EmptyEl } from './ContactList/ContactList.styled';
 
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
     filter: '',
   };
 
-  addContact = async data => {
+  addContact = data => {
     const identicalContactName = this.state.contacts.some(
       ({ name }) => data.name === name
     );
-    // const identicalContactNumber = this.state.contacts.some(
-    //   ({ number }) => data.number === number
-    // );
     if (identicalContactName) {
       return Report.warning(
         'WARNING',
@@ -25,6 +29,9 @@ export class App extends Component {
         'ok'
       );
     }
+    // const identicalContactNumber = this.state.contacts.some(
+    //   ({ number }) => data.number === number
+    // );
     // if (identicalContactNumber) {
     //   Confirm.show(
     //     'Confirmation',
@@ -56,26 +63,35 @@ export class App extends Component {
   getVisibleContacts = () => {
     const { contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
+    console.log(
+      contacts.filter(contact =>
+        contact.name.toLowerCase().includes(normalizedFilter)
+      )
+    );
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
 
   render() {
-    const { filter } = this.state;
+    const { filter, contacts } = this.state;
     const visibleContacts = this.getVisibleContacts();
 
     return (
-      <section>
+      <Section>
         <h2>Phonebook</h2>
-        <FormAddContact addContact={this.addContact} />
+        <FormAddContact addContact={this.addContact} contacts={contacts} />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
-        <ContactList
-          contacts={visibleContacts}
-          onDeleteContact={this.deleteContact}
-        />
-      </section>
+        {visibleContacts.length ? (
+          <ContactList
+            contacts={visibleContacts}
+            onDeleteContact={this.deleteContact}
+          />
+        ) : (
+          <EmptyEl>Not found</EmptyEl>
+        )}
+      </Section>
     );
   }
 }
