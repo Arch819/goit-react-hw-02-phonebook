@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { ContactItem } from 'components/ContactItem';
+import { ContactListStyled } from './ContactList.styled';
 
 export class ContactList extends Component {
   render() {
     const { contacts, onDeleteContact } = this.props;
     return (
-      <ul>
+      <ContactListStyled>
         {contacts.map(contact => {
           return (
             <ContactItem
@@ -16,7 +17,7 @@ export class ContactList extends Component {
             />
           );
         })}
-      </ul>
+      </ContactListStyled>
     );
   }
 }

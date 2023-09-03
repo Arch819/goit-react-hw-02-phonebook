@@ -36,12 +36,14 @@ export const ContactData = styled('p')({
   '&::after': {
     content: '""',
     position: 'absolute',
-    bottom: '-40%',
+    bottom: '-35%',
     left: '0',
     width: '100%',
     height: '2px',
+    border: 'none',
+    borderRadius: '4px',
 
-    transform: 'translateX(-80%)',
+    transform: 'translateX(-99%)',
     transition: 'transform 250ms cubic-bezier(0.4, 0, 0.2, 1)',
 
     background: '#000',
@@ -55,12 +57,12 @@ export const ContactData = styled('p')({
 export const ContactName = styled('span')({
   fontSize: '20px',
   fontWeight: '600',
-  lineHeight: '1,4',
+  lineHeight: '1.4',
 });
 export const ContactNumber = styled('span')({
   fontSize: '18px',
   fontWeight: '600',
-  lineHeight: '1,4',
+  lineHeight: '1.4',
 });
 
 export const ContactDelete = styled('button')({
@@ -94,7 +96,7 @@ export const ContactDelete = styled('button')({
   },
 
   '&:hover svg': {
-    // width: '20px',
+    fill: '#bbb',
     transitionDuration: '0.3s',
     transform: 'rotate(360deg)',
   },
@@ -102,7 +104,7 @@ export const ContactDelete = styled('button')({
   '&::before': {
     display: 'none',
     content: '"Delete"',
-    color: 'white',
+    color: '#bbb',
     opacity: '0',
     transitionDuration: '0.3s',
     fontSize: '2px',

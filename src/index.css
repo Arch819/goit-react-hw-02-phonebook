@@ -1,5 +1,16 @@
 @import-normalize;
 /* bring in normalize.css styles */
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 12px;
+}
 
 body {
   margin: 0;
